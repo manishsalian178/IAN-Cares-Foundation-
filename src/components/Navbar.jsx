@@ -22,7 +22,7 @@ const Navbar = () => {
         { name: 'Spirituality', href: '/#spirituality' },
         { name: 'Journey', href: '/#journey' },
         { name: 'Services', href: '/services' },
-        { name: 'Contact', href: '/#contact' },
+        { name: 'Contact', href: '/contact' },
     ];
 
     const isHomePage = location.pathname === '/';

@@ -42,20 +42,26 @@ const Footer = () => {
                 <div className="md:col-span-7 grid sm:grid-cols-2 gap-8 md:gap-10 bg-slate-800/50 p-8 md:p-10 rounded-[30px] md:rounded-[40px] border border-slate-700">
                     <div>
                         <h4 className="text-[#FDB913] font-bold mb-6 text-lg uppercase tracking-widest">Our Home</h4>
-                        <div className="flex items-start gap-4">
-                            <MapPin className="text-[#FDB913] mt-1 shrink-0" />
-                            <address className="not-italic text-slate-300 text-base leading-relaxed">
+                        <a
+                            href="https://maps.app.goo.gl/jfwsMhEVGwTU9kcX6"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-start gap-4 group cursor-pointer"
+                        >
+                            <MapPin className="text-[#FDB913] mt-1 shrink-0 group-hover:scale-110 transition-transform" />
+                            <address className="not-italic text-slate-300 text-base leading-relaxed group-hover:text-white transition-colors">
                                 Quila, Kinnigoli Town Panchayat,<br />
                                 Dakshina Kannada Dist.,<br />
                                 Karnataka, 574150
+                                <span className="block text-[#FDB913] text-sm mt-2 font-medium opacity-0 group-hover:opacity-100 transition-opacity">Click for directions →</span>
                             </address>
-                        </div>
+                        </a>
                     </div>
                     <div>
                         <h4 className="text-[#FDB913] font-bold mb-6 text-lg uppercase tracking-widest">Write To Us</h4>
                         <div className="flex items-center gap-4">
                             <Mail className="text-[#FDB913] shrink-0" />
-                            <span className="text-slate-300 text-base">help@iancares.foundation</span>
+                            <span className="text-slate-300 text-base">iancaresfoundation@gmail.com</span>
                         </div>
                         <div className="mt-8">
                             <button className="w-full bg-[#1A6B96] text-white py-4 rounded-2xl font-bold hover:bg-[#155a82] transition-all">

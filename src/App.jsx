@@ -1,0 +1,33 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import ServicesPage from './components/ServicesPage';
+import AboutPage from './components/AboutPage';
+import GetInvolvedPage from './components/GetInvolvedPage';
+import ContactPage from './components/ContactPage';
+import Journey from './components/Journey';
+import Gallery from './components/Gallery';
+import Blog from './components/Blog';
+import DonatePage from './components/DonatePage';
+import ScrollToTop from './components/ScrollToTop';
+
+const App = () => {
+  return (
+    <Router>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/get-involved" element={<GetInvolvedPage />} />
+        <Route path="/journey" element={<Journey />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/donate" element={<DonatePage />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

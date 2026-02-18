@@ -17,12 +17,13 @@ const AboutPage = () => {
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
+                        className="order-2 md:order-1"
                     >
                         <span className="bg-[#1A6B96]/10 text-[#1A6B96] px-4 py-1.5 rounded-full text-sm font-bold tracking-wider uppercase mb-6 inline-block">
                             Our Inspiration
                         </span>
                         <h1 className="text-4xl md:text-6xl font-bold text-[#1A6B96] mb-8 leading-tight">
-                             Ian Austin Mascarenhas
+                            Ian Austin Mascarenhas
                         </h1>
                         <div className="space-y-6 text-lg text-slate-600 leading-relaxed text-justify">
                             <p>
@@ -50,7 +51,7 @@ const AboutPage = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative"
+                        className="relative order-1 md:order-2"
                     >
                         <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
                             {/* Placeholder for Ian's photo - using a generic image if specific not available, or keeping a placeholder block */}

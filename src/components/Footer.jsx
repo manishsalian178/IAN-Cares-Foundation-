@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Phone, MapPin, Mail } from 'lucide-react';
+import { Heart, Phone, MapPin, Mail, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -24,7 +24,7 @@ const Footer = () => {
                             </div>
                             <div>
                                 <div className="text-slate-400 text-sm">Emergency Support</div>
-                                <div className="font-bold text-lg">+91 87500 75006</div>
+                                <a href="tel:+918750075006" className="font-bold text-lg hover:text-[#FDB913] transition-colors tracking-wide">+91 87500 75006</a>
                             </div>
                         </div>
                         <div className="flex items-center gap-4 group">
@@ -33,7 +33,7 @@ const Footer = () => {
                             </div>
                             <div>
                                 <div className="text-slate-400 text-sm">Office Enquiries</div>
-                                <div className="font-bold text-lg">+91 97402 96297</div>
+                                <a href="tel:+919740296297" className="font-bold text-lg hover:text-[#FDB913] transition-colors tracking-wide">+91 97402 96297</a>
                             </div>
                         </div>
                     </div>
@@ -77,6 +77,19 @@ const Footer = () => {
 
             <div className="max-w-[1600px] mx-auto px-6 md:px-12 pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm">
                 <p>© {new Date().getFullYear()} Ian Cares Foundation. All Rights Reserved.</p>
+
+                <div className="flex items-center gap-6">
+                    <a href="https://www.facebook.com/IanCaresFoundation/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook">
+                        <Facebook size={18} />
+                    </a>
+                    <a href="https://www.instagram.com/iancaresfoundation/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
+                        <Instagram size={18} />
+                    </a>
+                    <a href="https://www.linkedin.com/company/ian-cares-foundation/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
+                        <Linkedin size={18} />
+                    </a>
+                </div>
+
                 <div className="flex gap-8">
                     <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                     <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

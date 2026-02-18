@@ -178,9 +178,9 @@ const LandingPage = () => {
                         </ul>
                     </div>
                     <div className="relative">
-                        <div className="aspect-square rounded-full border-[10px] md:border-[20px] border-white/10 flex items-center justify-center p-6 md:p-8 animate-pulse max-w-[220px] md:max-w-none mx-auto">
-                            <div className="w-full h-full rounded-full bg-[#FDB913] flex items-center justify-center text-[#1A6B96] shadow-2xl shadow-[#FDB913]/30 p-8 md:p-0">
-                                <Sun size={48} className="md:w-[120px] md:h-[120px]" />
+                        <div className="w-56 h-56 md:w-[400px] md:h-[400px] rounded-full border-[10px] md:border-[20px] border-white/10 flex items-center justify-center p-4 md:p-8 animate-pulse mx-auto shrink-0 transition-all duration-700">
+                            <div className="w-full h-full rounded-full bg-[#FDB913] flex items-center justify-center text-[#1A6B96] shadow-2xl shadow-[#FDB913]/30">
+                                <Sun className="w-16 h-16 md:w-32 md:h-32" />
                             </div>
                         </div>
                     </div>
@@ -253,9 +253,9 @@ const LandingPage = () => {
                                 Expert care that focuses on long-term results and internal purpose, rather than just clinical numbers.
                             </p>
                         </div>
-                        <a href="/services" className="text-[#1A6B96] font-bold flex items-center gap-2 hover:underline">
+                        <Link to="/services" className="text-[#1A6B96] font-bold flex items-center gap-2 hover:underline">
                             View All Services <ArrowRight size={20} />
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">

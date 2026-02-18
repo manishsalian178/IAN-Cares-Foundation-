@@ -59,9 +59,68 @@ const Blog = () => {
             {/* Blog Listing Section */}
             <section id="blog" className="py-24 px-6 bg-white/50 backdrop-blur-sm">
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold text-[#1A6B96] mb-4">Blogs</h2>
+                        <div className="w-20 h-1.5 bg-[#FDB913] mx-auto rounded-full mb-12"></div>
+                    </div>
+
+                    {/* Featured / Newly Added Blog */}
+                    {blogs.length > 0 && (
+                        <div className="mb-20">
+                            <div className="flex items-center gap-4 mb-8">
+                                <span className="bg-[#1A6B96] text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">Newly Added</span>
+                                <div className="h-[1px] bg-slate-200 flex-grow"></div>
+                            </div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8 }}
+                                viewport={{ once: true }}
+                                className="bg-white rounded-[2rem] overflow-hidden shadow-2xl shadow-slate-200/60 border border-slate-100 flex flex-col lg:flex-row cursor-pointer hover:shadow-3xl transition-all group"
+                                onClick={() => setSelectedBlog(blogs[0])}
+                            >
+                                <div className="lg:w-1/2 h-64 lg:h-auto overflow-hidden">
+                                    <img
+                                        src={blogs[0].image}
+                                        alt={blogs[0].title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                </div>
+                                <div className="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                    <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar size={16} className="text-[#1A6B96]" />
+                                            <span>{blogs[0].date}</span>
+                                        </div>
+                                        <div className="flex items-center gap-1">
+                                            <User size={16} className="text-[#1A6B96]" />
+                                            <span>{blogs[0].author}</span>
+                                        </div>
+                                    </div>
+                                    <h3 className="text-2xl md:text-4xl font-bold text-[#1A6B96] mb-6 group-hover:text-[#FDB913] transition-colors leading-tight">
+                                        {blogs[0].title}
+                                    </h3>
+                                    <p className="text-slate-600 text-lg leading-relaxed mb-8 line-clamp-3">
+                                        {blogs[0].excerpt}
+                                    </p>
+                                    <button className="text-[#1A6B96] font-bold text-lg flex items-center gap-2 hover:gap-3 transition-all group-hover:text-[#FDB913]">
+                                        Read Full Article <ArrowRight size={24} />
+                                    </button>
+                                </div>
+                            </motion.div>
+                        </div>
+                    )}
+
+                    {/* Other Blogs Section */}
+                    <div className="flex items-center gap-4 mb-12">
+                        <h3 className="text-xl md:text-3xl font-bold text-[#1A6B96]/80 whitespace-nowrap">Latest Blogs</h3>
+                        <div className="h-[1px] bg-slate-200 flex-grow"></div>
+                    </div>
+
                     {/* Responsive Blog Grid */}
                     <div className="grid grid-cols-2 gap-4 md:gap-8">
-                        {blogs.map((blog, index) => (
+                        {blogs.slice(1).map((blog, index) => (
                             <motion.div
                                 key={blog.id}
                                 initial={{ opacity: 0, y: 20 }}

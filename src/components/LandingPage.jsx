@@ -44,14 +44,14 @@ const LandingPage = () => {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-12 md:pt-20 pb-16 md:pb-20 px-6 overflow-hidden">
+            <section className="relative pt-28 md:pt-20 pb-16 md:pb-20 px-6 overflow-hidden">
                 <div className="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-10 blur-3xl bg-[#FDB913]/30 rounded-full translate-x-1/2 -translate-y-1/2"></div>
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid md:grid-cols-2 items-center gap-12">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="-mt-16 md:-mt-28"
+                        className="mt-8 md:-mt-28"
                     >
                         <span className="bg-[#1A6B96]/10 text-[#1A6B96] px-4 py-1.5 rounded-full text-sm font-bold tracking-wider uppercase mb-6 inline-block">
                             Dedicated to Recovery
@@ -178,9 +178,9 @@ const LandingPage = () => {
                         </ul>
                     </div>
                     <div className="relative">
-                        <div className="aspect-square rounded-full border-[10px] md:border-[20px] border-white/10 flex items-center justify-center p-6 md:p-8 animate-pulse max-w-[300px] md:max-w-none mx-auto">
+                        <div className="aspect-square rounded-full border-[10px] md:border-[20px] border-white/10 flex items-center justify-center p-6 md:p-8 animate-pulse max-w-[220px] md:max-w-none mx-auto">
                             <div className="w-full h-full rounded-full bg-[#FDB913] flex items-center justify-center text-[#1A6B96] shadow-2xl shadow-[#FDB913]/30 p-8 md:p-0">
-                                <Sun size={60} className="md:w-[120px] md:h-[120px]" />
+                                <Sun size={48} className="md:w-[120px] md:h-[120px]" />
                             </div>
                         </div>
                     </div>

@@ -112,7 +112,7 @@ const Navbar = ({ onBookConsult }) => {
                         initial={{ opacity: 0, x: '100%' }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
-                        className="fixed inset-0 bg-white z-[40] flex flex-col justify-center items-center gap-8 md:hidden"
+                        className="fixed inset-0 bg-white z-[40] flex flex-col justify-start pt-24 items-center gap-8 md:hidden"
                     >
                         {navLinks.map((link) => (
                             link.href.startsWith('/#') && isHomePage ? (

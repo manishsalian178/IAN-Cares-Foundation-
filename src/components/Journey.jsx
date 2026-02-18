@@ -60,46 +60,37 @@ const Journey = () => {
             <section id="stories" className="py-24 px-6 bg-white/50 backdrop-blur-sm">
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12">
                     {/* Mobile Carousel */}
-                    <div className="md:hidden">
-                        <MobileCarousel
-                            items={stories}
-                            renderItem={(story) => (
-                                <motion.div
-                                    key={story.id}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 cursor-pointer group h-full flex flex-col"
-                                    onClick={() => setSelectedStory(story)}
-                                >
-                                    {/* Image */}
-                                    <div className="relative h-48 overflow-hidden shrink-0">
-                                        <img
-                                            src={story.image}
-                                            alt={story.name}
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-4">
-                                            <div>
-                                                <h3 className="text-xl font-bold text-white mb-1">{story.name}</h3>
-                                                <div className="flex items-center gap-2 text-white/80 text-xs">
-                                                    <Calendar size={12} />
-                                                    <span>{story.date}</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div className="md:hidden grid grid-cols-2 gap-4">
+                        {stories.map((story) => (
+                            <motion.div
+                                key={story.id}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 cursor-pointer group h-full flex flex-col"
+                                onClick={() => setSelectedStory(story)}
+                            >
+                                {/* Image slice for better layout in grid */}
+                                <div className="relative h-32 overflow-hidden shrink-0">
+                                    <img
+                                        src={story.image}
+                                        alt={story.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-2">
+                                        <h3 className="text-xs font-bold text-white line-clamp-1">{story.name}</h3>
                                     </div>
+                                </div>
 
-                                    {/* Content */}
-                                    <div className="p-6 flex-grow flex flex-col">
-                                        <p className="text-slate-600 leading-relaxed mb-4 text-sm line-clamp-3">
-                                            {story.shortDescription}
-                                        </p>
-                                        <div className="mt-auto text-[#1A6B96] font-bold text-sm flex items-center gap-2">
-                                            Read More <ArrowRight size={16} />
-                                        </div>
+                                {/* Content */}
+                                <div className="p-3 flex-grow flex flex-col">
+                                    <p className="text-slate-600 leading-tight mb-2 text-[10px] line-clamp-2">
+                                        {story.shortDescription}
+                                    </p>
+                                    <div className="mt-auto text-[#1A6B96] font-bold text-[10px] flex items-center gap-1">
+                                        Read <ArrowRight size={10} />
                                     </div>
-                                </motion.div>
-                            )}
-                        />
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
 
                     {/* Desktop Grid */}

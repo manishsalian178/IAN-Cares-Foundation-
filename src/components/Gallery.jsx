@@ -49,34 +49,27 @@ const Gallery = () => {
             <section id="gallery" className="py-24 px-6 bg-white/50 backdrop-blur-sm">
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12">
                     {/* Mobile Carousel */}
-                    <div className="md:hidden">
-                        <MobileCarousel
-                            items={galleryImages}
-                            renderItem={(item) => (
-                                <motion.div
-                                    key={item.id}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="relative rounded-2xl overflow-hidden shadow-xl shadow-slate-200/50 cursor-pointer group h-full w-full"
-                                    onClick={() => setSelectedImage(item)}
-                                >
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                                        <span className="text-[#FDB913] text-xs font-bold uppercase tracking-wider mb-2 block">
-                                            {item.category}
-                                        </span>
-                                        <h3 className="text-white text-xl font-bold mb-3">{item.title}</h3>
-                                        <div className="flex items-center gap-2 text-white">
-                                            <ZoomIn size={18} />
-                                            <span className="text-sm">Tap to view</span>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            )}
-                        />
+                    <div className="md:hidden grid grid-cols-2 gap-4">
+                        {galleryImages.map((item) => (
+                            <motion.div
+                                key={item.id}
+                                whileTap={{ scale: 0.95 }}
+                                className="relative rounded-2xl overflow-hidden shadow-xl shadow-slate-200/50 cursor-pointer group aspect-square"
+                                onClick={() => setSelectedImage(item)}
+                            >
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-3">
+                                    <span className="text-[#FDB913] text-[8px] font-bold uppercase tracking-wider mb-0.5 block">
+                                        {item.category}
+                                    </span>
+                                    <h3 className="text-white text-[10px] font-bold line-clamp-1">{item.title}</h3>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
 
                     {/* Desktop Grid */}

@@ -64,9 +64,12 @@ const Footer = () => {
                             <span className="text-slate-300 text-base break-all">iancaresfoundation@gmail.com</span>
                         </div>
                         <div className="mt-8">
-                            <button className="w-full bg-[#1A6B96] text-white py-4 rounded-2xl font-bold hover:bg-[#155a82] transition-all">
+                            <a
+                                href="mailto:iancaresfoundation@gmail.com"
+                                className="w-full bg-[#1A6B96] text-white py-4 rounded-2xl font-bold hover:bg-[#155a82] transition-all inline-block text-center"
+                            >
                                 Send a Message
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,10 @@ const AboutPage = () => {
 
             {/* Hero / Introduction Section */}
             <section className="relative pt-32 pb-20 px-6 overflow-hidden bg-[#E8F6FD]">
+                <div className="max-w-[1600px] mx-auto px-6 md:px-12 mb-12 relative z-10 text-center">
+                    <h2 className="text-3xl md:text-5xl font-bold text-[#1A6B96] mb-4">About Us</h2>
+                    <div className="w-20 h-1.5 bg-[#FDB913] mx-auto rounded-full"></div>
+                </div>
 
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center relative z-10">
                     <motion.div

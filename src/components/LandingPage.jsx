@@ -25,17 +25,38 @@ const LandingPage = () => {
         {
             icon: <Brain className="w-10 h-10" />,
             title: 'De-addiction Strategy',
-            description: 'Focusing on long-term sobriety and relapse prevention through a guided, supportive environment.'
+            description: 'Focusing on long-term sobriety and relapse prevention through a guided, supportive environment.',
+            bgImage: '/images/de addiction.jpeg'
         },
         {
             icon: <Heart className="w-10 h-10" />,
             title: 'Mental Health Support',
-            description: 'Counseling for depression and anxiety focused on restoring balance and building emotional resilience.'
+            description: 'Counseling for depression and anxiety focused on restoring balance and building emotional resilience.',
+            bgImage: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=2070&auto=format&fit=crop'
         },
         {
             icon: <Users className="w-10 h-10" />,
             title: 'Youth Empowerment',
-            description: 'Workshops focused on unlocking full potential and discovering internal purpose for young adults.'
+            description: 'Workshops focused on unlocking full potential and discovering internal purpose for young adults.',
+            bgImage: '/images/youth.jpg'
+        }
+    ];
+
+    const missionReasons = [
+        {
+            title: 'Peer Support',
+            desc: 'Connecting with those who understand the struggle deeply.',
+            bgImage: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop'
+        },
+        {
+            title: 'Holistic Focus',
+            desc: 'Restoring mind, body, and spirit in unison.',
+            bgImage: 'https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?q=80&w=2076&auto=format&fit=crop'
+        },
+        {
+            title: 'Family Values',
+            desc: 'Rebuilding the broken bridges to your loved ones.',
+            bgImage: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2070&auto=format&fit=crop'
         }
     ];
 
@@ -98,7 +119,7 @@ const LandingPage = () => {
                     >
                         <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
                             <img
-                                src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2520&auto=format&fit=crop"
+                                src="/images/Ian cares house.jpeg"
                                 alt="Healing Journey"
                                 className="w-full aspect-[4/5] object-cover"
                             />
@@ -120,21 +141,25 @@ const LandingPage = () => {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            { title: 'Peer Support', desc: 'Connecting with those who understand the struggle deeply.' },
-                            { title: 'Holistic Focus', desc: 'Restoring mind, body, and spirit in unison.' },
-                            { title: 'Family Values', desc: 'Rebuilding the broken bridges to your loved ones.' }
-                        ].map((item) => (
+                        {missionReasons.map((item) => (
                             <motion.div
                                 key={item.title}
                                 whileHover={{ y: -10 }}
-                                className="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100"
+                                className="relative bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden group"
                             >
-                                <div className="w-12 h-12 bg-[#FDB913]/20 rounded-xl flex items-center justify-center text-[#FDB913] mb-6">
-                                    <CheckCircle2 size={24} />
+                                {/* Background Image */}
+                                <div className="absolute inset-0 z-0 opacity-[0.14] pointer-events-none">
+                                    <img src={item.bgImage} alt="" className="w-full h-full object-cover brightness-110" />
+                                    <div className="absolute inset-0 bg-[#FDB913]/10 mix-blend-overlay"></div>
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A6B96] mb-4">{item.title}</h3>
-                                <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+
+                                <div className="relative z-10">
+                                    <div className="w-12 h-12 bg-[#FDB913]/20 rounded-xl flex items-center justify-center text-[#FDB913] mb-6 group-hover:bg-[#FDB913] group-hover:text-white transition-colors duration-300">
+                                        <CheckCircle2 size={24} />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-[#1A6B96] mb-4">{item.title}</h3>
+                                    <p className="text-slate-600 leading-relaxed font-medium">{item.desc}</p>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
@@ -266,15 +291,37 @@ const LandingPage = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.2 }}
                                 viewport={{ once: true }}
-                                className="bg-white rounded-3xl p-10 shadow-xl shadow-blue-900/5 group hover:bg-[#1A6B96] transition-all duration-500"
+                                className="relative bg-white rounded-3xl p-10 shadow-xl shadow-blue-900/5 group hover:bg-[#1A6B96] transition-all duration-500 overflow-hidden"
                             >
-                                <div className="w-16 h-16 bg-[#1A6B96]/5 text-[#1A6B96] rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#FDB913] group-hover:text-white transition-all duration-500">
-                                    {service.icon}
+                                {/* Background Image with Overlay */}
+                                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                    <img
+                                        src={service.bgImage}
+                                        alt=""
+                                        className="w-full h-full object-cover transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-[#1A6B96]/80 mix-blend-multiply" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[#1A6B96] mb-4 group-hover:text-white transition-colors">{service.title}</h3>
-                                <p className="text-slate-600 leading-relaxed group-hover:text-blue-50 transition-colors">
-                                    {service.description}
-                                </p>
+
+                                {/* Default Background Image (Static) */}
+                                <div className="absolute inset-0 z-0 opacity-[0.15] group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
+                                    <img
+                                        src={service.bgImage}
+                                        alt=""
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-[#1A6B96]/20 to-transparent" />
+                                </div>
+
+                                <div className="relative z-10">
+                                    <div className="w-16 h-16 bg-[#1A6B96]/5 text-[#1A6B96] rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#FDB913] group-hover:text-white transition-all duration-500">
+                                        {service.icon}
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-[#1A6B96] mb-4 group-hover:text-white transition-colors duration-500">{service.title}</h3>
+                                    <p className="text-slate-600 leading-relaxed group-hover:text-blue-50 transition-colors duration-500 font-medium">
+                                        {service.description}
+                                    </p>
+                                </div>
                             </motion.div>
                         ))}
                     </div>

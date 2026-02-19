@@ -9,22 +9,26 @@ const GetInvolvedPage = () => {
         {
             icon: <Hand className="w-10 h-10" />,
             title: 'Volunteer',
-            description: 'Volunteer at our centre or events to make a direct impact.'
+            description: 'Volunteer at our centre or events to make a direct impact.',
+            bgImage: '/images/volunteer.jpeg'
         },
         {
             icon: <Heart className="w-10 h-10" />,
             title: 'Sponsor',
-            description: 'Sponsor a recovery program to help those in need.'
+            description: 'Sponsor a recovery program to help those in need.',
+            bgImage: '/images/spoonsor.webp'
         },
         {
             icon: <Megaphone className="w-10 h-10" />,
             title: 'Collaborate',
-            description: 'Collaborate for awareness campaigns to spread the word.'
+            description: 'Collaborate for awareness campaigns to spread the word.',
+            bgImage: '/images/Collaborate.jpeg'
         },
         {
             icon: <Briefcase className="w-10 h-10" />,
             title: 'Partner',
-            description: 'Offer CSR partnerships for social impact and community growth.'
+            description: 'Offer CSR partnerships for social impact and community growth.',
+            bgImage: '/images/Partner.jpeg'
         }
     ];
 
@@ -86,13 +90,21 @@ const GetInvolvedPage = () => {
                                 transition={{ delay: index * 0.1 }}
                                 viewport={{ once: true }}
                                 whileHover={{ y: -10 }}
-                                className="bg-white p-8 rounded-3xl shadow-xl shadow-blue-900/5 hover:shadow-2xl transition-all duration-300 border border-slate-100 group"
+                                className="relative bg-white p-8 rounded-3xl shadow-xl shadow-blue-900/5 hover:shadow-2xl transition-all duration-300 border border-slate-100 group overflow-hidden"
                             >
-                                <div className="w-16 h-16 bg-[#1A6B96]/10 text-[#1A6B96] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FDB913] group-hover:text-white transition-colors duration-300">
-                                    {item.icon}
+                                {/* Background Image */}
+                                <div className="absolute inset-0 z-0 opacity-[0.15] group-hover:opacity-[0.25] transition-opacity duration-300 pointer-events-none">
+                                    <img src={item.bgImage} alt="" className="w-full h-full object-cover" />
+                                    <div className="absolute inset-0 bg-[#1A6B96]/5 mix-blend-overlay"></div>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#1A6B96] mb-3">{item.title}</h3>
-                                <p className="text-slate-600">{item.description}</p>
+
+                                <div className="relative z-10">
+                                    <div className="w-16 h-16 bg-[#1A6B96]/10 text-[#1A6B96] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FDB913] group-hover:text-white transition-colors duration-300">
+                                        {item.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-[#1A6B96] mb-3 transition-colors duration-300 group-hover:text-[#1A6B96]">{item.title}</h3>
+                                    <p className="text-slate-600 transition-colors duration-300 group-hover:text-slate-700 font-medium">{item.description}</p>
+                                </div>
                             </motion.div>
                         ))}
                     </div>

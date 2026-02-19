@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import ServicesPage from './components/ServicesPage';
@@ -10,11 +10,24 @@ import Gallery from './components/Gallery';
 import Blog from './components/Blog';
 import DonatePage from './components/DonatePage';
 import ScrollToTop from './components/ScrollToTop';
+import WelcomePopup from './components/WelcomePopup';
 
 const App = () => {
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  useEffect(() => {
+    // Show popup shortly after mount for better entrance feel
+    const timer = setTimeout(() => {
+      setShowWelcome(true);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
+      <WelcomePopup isOpen={showWelcome} onClose={() => setShowWelcome(false)} />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />

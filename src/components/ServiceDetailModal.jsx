@@ -23,14 +23,24 @@ const ServiceDetailModal = ({ isOpen, onClose, service }) => {
                         className="relative bg-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl w-full max-w-xl overflow-hidden"
                         onClick={(e) => e.stopPropagation()}
                     >
+                        {/* Background Image with Overlay */}
+                        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+                            <img
+                                src={service.bgImage}
+                                alt=""
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white/80" />
+                        </div>
+
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1A6B96] transition-all z-10"
+                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1A6B96] transition-all z-20"
                         >
                             <X size={24} />
                         </button>
 
-                        <div className="p-6 md:p-12">
+                        <div className="relative z-10 p-6 md:p-12">
                             <div className="w-14 h-14 md:w-16 md:h-16 bg-[#1A6B96]/10 text-[#1A6B96] rounded-2xl flex items-center justify-center mb-6 md:mb-8">
                                 {service.icon}
                             </div>

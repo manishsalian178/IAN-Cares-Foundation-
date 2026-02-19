@@ -61,7 +61,7 @@ const AboutPage = () => {
                             {/* Placeholder for Ian's photo - using a generic image if specific not available, or keeping a placeholder block */}
                             <div className="bg-slate-200 w-full aspect-[4/5] flex items-center justify-center text-slate-400">
                                 <img
-                                    src="/images/Ian sir.jpeg"
+                                    src="/images/Ian sir 1.jpeg"
                                     alt="Ian Austin Mascarenhas"
                                     className="w-full h-full object-cover"
                                 />

@@ -54,14 +54,24 @@ const ConsultancyModal = ({ isOpen, onClose }) => {
                         className="relative bg-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl w-full max-w-2xl overflow-hidden"
                         onClick={(e) => e.stopPropagation()}
                     >
+                        {/* Background Image with Overlay */}
+                        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none">
+                            <img
+                                src="/images/Ian cares house.jpeg"
+                                alt=""
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/95" />
+                        </div>
+
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1A6B96] transition-all z-10"
+                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-[#1A6B96] transition-all z-20"
                         >
                             <X size={24} />
                         </button>
 
-                        <div className="p-6 md:p-12 overflow-y-auto max-h-[90vh]">
+                        <div className="relative z-10 p-6 md:p-12 overflow-y-auto max-h-[90vh]">
                             <div className="text-center mb-8 md:mb-10">
                                 <h2 className="text-2xl md:text-4xl font-bold text-[#1A6B96] mb-4">Book a Consultancy</h2>
                                 <p className="text-slate-500 max-w-md mx-auto">

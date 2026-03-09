@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, X, ZoomIn } from 'lucide-react';
+import { ArrowRight, X, ZoomIn, Play } from 'lucide-react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -100,7 +100,9 @@ const Gallery = () => {
                                             <span className="text-[#FDB913] text-[8px] font-bold uppercase tracking-wider mb-0.5 block">
                                                 {item.category}
                                             </span>
-                                            <h3 className="text-white text-[10px] font-bold line-clamp-1">{item.title}</h3>
+                                            <h3 className="text-white text-[10px] font-bold line-clamp-1 flex items-center gap-1">
+                                                {item.title}
+                                            </h3>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -153,7 +155,7 @@ const Gallery = () => {
                 </div>
             </section>
 
-            {/* Image Modal */}
+            {/* Image/Video Modal */}
             <AnimatePresence>
                 {selectedImage && (
                     <motion.div
@@ -179,8 +181,8 @@ const Gallery = () => {
                                 <X size={20} />
                             </button>
 
-                            {/* Image */}
-                            <div className="relative rounded-2xl overflow-hidden">
+                            {/* Media Content */}
+                            <div className="relative rounded-2xl overflow-hidden bg-black flex items-center justify-center min-h-[50vh]">
                                 <img
                                     src={getImageUrl(selectedImage.image)}
                                     alt={selectedImage.title}
@@ -188,7 +190,7 @@ const Gallery = () => {
                                 />
 
                                 {/* Info Overlay */}
-                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-8">
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-8 pointer-events-none">
                                     <span className="text-[#FDB913] text-sm font-bold uppercase tracking-wider mb-2 block">
                                         {selectedImage.category}
                                     </span>

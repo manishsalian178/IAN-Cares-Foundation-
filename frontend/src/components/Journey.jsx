@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, X, Calendar, Heart } from 'lucide-react';
+import { ArrowRight, X, Calendar, Heart, Play } from 'lucide-react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -30,6 +30,55 @@ const Journey = () => {
     const getImageUrl = (path) => {
         if (!path) return '';
         return path.startsWith('http') ? path : `${API_BASE_URL}${path}`;
+    };
+
+    const getEmbedUrl = (url) => {
+        if (!url) return '';
+
+        // YouTube
+        if (url.includes('youtube.com/watch?v=')) {
+            const id = new URL(url).searchParams.get('v');
+            return `https://www.youtube.com/embed/${id}`;
+        }
+        if (url.includes('youtu.be/')) {
+            const id = url.split('/').pop().split('?')[0];
+            return `https://www.youtube.com/embed/${id}`;
+        }
+        if (url.includes('youtube.com/embed/')) {
+            return url;
+        }
+
+        // Vimeo
+        if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
+            const id = url.split('/').pop().split('?')[0];
+            return `https://player.vimeo.com/video/${id}`;
+        }
+
+        // Facebook
+        if (url.includes('facebook.com/') && (url.includes('/videos/') || url.includes('/watch/'))) {
+            return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0&width=560`;
+        }
+
+        // Instagram
+        if (url.includes('instagram.com/p/') || url.includes('instagram.com/reels/') || url.includes('instagram.com/reel/')) {
+            const baseUrl = url.split('?')[0];
+            return `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}embed/`;
+        }
+
+        // TikTok
+        if (url.includes('tiktok.com/') && url.includes('/video/')) {
+            const id = url.split('/video/')[1].split('?')[0];
+            return `https://www.tiktok.com/embed/v2/${id}`;
+        }
+
+        return url;
+    };
+
+    const isDirectVideoFile = (url) => {
+        if (!url) return false;
+        const cleanUrl = url.split('?')[0].toLowerCase();
+        const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.m4v'];
+        return videoExtensions.some(ext => cleanUrl.endsWith(ext)) || url.includes('/video/upload/');
     };
 
     return (
@@ -109,8 +158,24 @@ const Journey = () => {
                                                 alt={story.name}
                                                 className="w-full h-full object-cover"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-2">
-                                                <h3 className="text-xs font-bold text-white line-clamp-1">{story.name}</h3>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-2 relative">
+                                                <h3 className="text-xs font-bold text-white line-clamp-1 flex items-center gap-1">
+                                                    {story.name}
+                                                </h3>
+                                                {story.videoUrl && (
+                                                    <div className="absolute bottom-2 right-2">
+                                                        <a
+                                                            href={story.videoUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            className="w-6 h-6 bg-white/90 rounded-full flex items-center justify-center text-[#1A6B96] shadow-lg"
+                                                            title="Watch Video"
+                                                        >
+                                                            <Play size={12} fill="currentColor" className="ml-0.5" />
+                                                        </a>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
 
@@ -148,6 +213,20 @@ const Journey = () => {
                                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                                            {story.videoUrl && (
+                                                <div className="absolute bottom-4 right-4 z-10">
+                                                    <a
+                                                        href={story.videoUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[#1A6B96] shadow-xl transform hover:scale-110 transition-all border border-white/20"
+                                                        title="Watch Video"
+                                                    >
+                                                        <Play size={24} fill="currentColor" className="ml-1" />
+                                                    </a>
+                                                </div>
+                                            )}
                                             <div className="absolute bottom-4 left-4 right-4">
                                                 <h3 className="text-2xl font-bold text-white mb-1">{story.name}</h3>
                                                 <div className="flex items-center gap-2 text-white/80 text-sm">
@@ -200,23 +279,25 @@ const Journey = () => {
                                 <X size={20} />
                             </button>
 
-                            {/* Featured Media (Image or Video) */}
-                            <div className="relative h-80 overflow-hidden rounded-t-3xl bg-slate-900">
-                                {selectedStory.video ? (
-                                    <video
-                                        src={selectedStory.video}
-                                        controls
-                                        className="w-full h-full object-contain"
-                                        poster={getImageUrl(selectedStory.image)}
-                                    >
-                                        Your browser does not support the video tag.
-                                    </video>
-                                ) : (
-                                    <img
-                                        src={getImageUrl(selectedStory.image)}
-                                        alt={selectedStory.name}
-                                        className="w-full h-full object-cover"
-                                    />
+                            {/* Featured Image */}
+                            <div className="relative h-80 overflow-hidden rounded-t-3xl bg-slate-100">
+                                <img
+                                    src={getImageUrl(selectedStory.image)}
+                                    alt={selectedStory.name}
+                                    className="w-full h-full object-cover"
+                                />
+                                {selectedStory.videoUrl && (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group">
+                                        <a
+                                            href={selectedStory.videoUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[#1A6B96] shadow-2xl transform hover:scale-110 transition-all border border-white/20"
+                                            title="Watch Video"
+                                        >
+                                            <Play size={40} fill="currentColor" className="ml-2" />
+                                        </a>
+                                    </div>
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
                                 <div className="absolute bottom-8 left-8 right-8 pointer-events-none">

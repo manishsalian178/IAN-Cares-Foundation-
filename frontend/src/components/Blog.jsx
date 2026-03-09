@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, X, Calendar, User, Tag } from 'lucide-react';
+import { ArrowRight, X, Calendar, Tag, Play } from 'lucide-react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -27,10 +27,58 @@ const Blog = () => {
         fetchBlogs();
     }, []);
 
-    // Helper to format image URL
     const getImageUrl = (path) => {
         if (!path) return '';
         return path.startsWith('http') ? path : `${API_BASE_URL}${path}`;
+    };
+
+    const getEmbedUrl = (url) => {
+        if (!url) return '';
+
+        // YouTube
+        if (url.includes('youtube.com/watch?v=')) {
+            const id = new URL(url).searchParams.get('v');
+            return `https://www.youtube.com/embed/${id}`;
+        }
+        if (url.includes('youtu.be/')) {
+            const id = url.split('/').pop().split('?')[0];
+            return `https://www.youtube.com/embed/${id}`;
+        }
+        if (url.includes('youtube.com/embed/')) {
+            return url;
+        }
+
+        // Vimeo
+        if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
+            const id = url.split('/').pop().split('?')[0];
+            return `https://player.vimeo.com/video/${id}`;
+        }
+
+        // Facebook
+        if (url.includes('facebook.com/') && (url.includes('/videos/') || url.includes('/watch/'))) {
+            return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0&width=560`;
+        }
+
+        // Instagram
+        if (url.includes('instagram.com/p/') || url.includes('instagram.com/reels/') || url.includes('instagram.com/reel/')) {
+            const baseUrl = url.split('?')[0];
+            return `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}embed/`;
+        }
+
+        // TikTok
+        if (url.includes('tiktok.com/') && url.includes('/video/')) {
+            const id = url.split('/video/')[1].split('?')[0];
+            return `https://www.tiktok.com/embed/v2/${id}`;
+        }
+
+        return url;
+    };
+
+    const isDirectVideoFile = (url) => {
+        if (!url) return false;
+        const cleanUrl = url.split('?')[0].toLowerCase();
+        const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.m4v'];
+        return videoExtensions.some(ext => cleanUrl.endsWith(ext)) || url.includes('/video/upload/');
     };
 
     return (
@@ -110,23 +158,31 @@ const Blog = () => {
                                         className="bg-white rounded-[2rem] overflow-hidden shadow-2xl shadow-slate-200/60 border border-slate-100 flex flex-col lg:flex-row cursor-pointer hover:shadow-3xl transition-all group"
                                         onClick={() => setSelectedBlog(blogs[0])}
                                     >
-                                        <div className="lg:w-1/2 h-64 lg:h-auto overflow-hidden">
+                                        <div className="lg:w-1/2 h-64 lg:h-auto overflow-hidden relative group">
                                             <img
                                                 src={getImageUrl(blogs[0].image)}
                                                 alt={blogs[0].title}
                                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
+                                            {blogs[0].videoUrl && (
+                                                <div className="absolute bottom-6 right-6 z-10">
+                                                    <a
+                                                        href={blogs[0].videoUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[#1A6B96] shadow-xl transform hover:scale-110 transition-all border border-white/20"
+                                                        title="Watch Video"
+                                                    >
+                                                        <Play size={28} fill="currentColor" className="ml-1" />
+                                                    </a>
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                                            <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
-                                                <div className="flex items-center gap-1">
-                                                    <Calendar size={16} className="text-[#1A6B96]" />
-                                                    <span>{new Date(blogs[0].createdAt).toLocaleDateString()}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1">
-                                                    <User size={16} className="text-[#1A6B96]" />
-                                                    <span>Staff</span>
-                                                </div>
+                                            <div className="flex items-center gap-1">
+                                                <Calendar size={16} className="text-[#1A6B96]" />
+                                                <span>{new Date(blogs[0].createdAt).toLocaleDateString()}</span>
                                             </div>
                                             <h3 className="text-2xl md:text-4xl font-bold text-[#1A6B96] mb-6 group-hover:text-[#FDB913] transition-colors leading-tight">
                                                 {blogs[0].title}
@@ -152,7 +208,7 @@ const Blog = () => {
                             <div className="grid grid-cols-2 gap-4 md:gap-8">
                                 {blogs.slice(1).map((blog, index) => (
                                     <motion.div
-                                        key={blog.id}
+                                        key={blog._id}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -169,6 +225,20 @@ const Blog = () => {
                                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                                            {blog.videoUrl && (
+                                                <div className="absolute bottom-3 right-3 z-10">
+                                                    <a
+                                                        href={blog.videoUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[#1A6B96] shadow-lg transform hover:scale-110 transition-all border border-white/20"
+                                                        title="Watch Video"
+                                                    >
+                                                        <Play size={20} fill="currentColor" className="ml-0.5" />
+                                                    </a>
+                                                </div>
+                                            )}
                                             <div className="absolute top-2 left-2 md:top-4 md:left-4">
                                                 <span className="bg-[#FDB913] text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider">
                                                     Updates
@@ -182,10 +252,6 @@ const Blog = () => {
                                                 <div className="flex items-center gap-1">
                                                     <Calendar size={14} />
                                                     <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1">
-                                                    <User size={14} />
-                                                    <span>Staff</span>
                                                 </div>
                                             </div>
 
@@ -237,23 +303,25 @@ const Blog = () => {
                                 <X size={20} />
                             </button>
 
-                            {/* Featured Media (Image or Video) */}
-                            <div className="relative h-80 overflow-hidden rounded-t-3xl bg-slate-900">
-                                {selectedBlog.video ? (
-                                    <video
-                                        src={selectedBlog.video}
-                                        controls
-                                        className="w-full h-full object-contain"
-                                        poster={getImageUrl(selectedBlog.image)}
-                                    >
-                                        Your browser does not support the video tag.
-                                    </video>
-                                ) : (
-                                    <img
-                                        src={getImageUrl(selectedBlog.image)}
-                                        alt={selectedBlog.title}
-                                        className="w-full h-full object-cover"
-                                    />
+                            {/* Featured Image */}
+                            <div className="relative h-80 overflow-hidden rounded-t-3xl bg-slate-100">
+                                <img
+                                    src={getImageUrl(selectedBlog.image)}
+                                    alt={selectedBlog.title}
+                                    className="w-full h-full object-cover"
+                                />
+                                {selectedBlog.videoUrl && (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group">
+                                        <a
+                                            href={selectedBlog.videoUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[#1A6B96] shadow-2xl transform hover:scale-110 transition-all border border-white/20"
+                                            title="Watch Video"
+                                        >
+                                            <Play size={40} fill="currentColor" className="ml-2" />
+                                        </a>
+                                    </div>
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
                                 <div className="absolute top-8 left-8">
@@ -263,15 +331,9 @@ const Blog = () => {
                                 </div>
                                 <div className="absolute bottom-8 left-8 right-8 pointer-events-none">
                                     <h2 className="text-4xl font-bold text-white mb-4">{selectedBlog.title}</h2>
-                                    <div className="flex items-center gap-4 text-white/90">
-                                        <div className="flex items-center gap-2">
-                                            <Calendar size={16} />
-                                            <span>{new Date(selectedBlog.createdAt).toLocaleDateString()}</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <User size={16} />
-                                            <span>Staff</span>
-                                        </div>
+                                    <div className="flex items-center gap-2">
+                                        <Calendar size={16} />
+                                        <span>{new Date(selectedBlog.createdAt).toLocaleDateString()}</span>
                                     </div>
                                 </div>
                             </div>
@@ -297,16 +359,7 @@ const Blog = () => {
                                 </div>
 
                                 <div className="mt-10 pt-8 border-t border-slate-200">
-                                    <div className="flex items-center justify-between flex-wrap gap-4">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 bg-[#1A6B96] rounded-full flex items-center justify-center text-white font-bold">
-                                                S
-                                            </div>
-                                            <div>
-                                                <p className="font-bold text-[#1A6B96]">Staff</p>
-                                                <p className="text-sm text-slate-500">Contributor</p>
-                                            </div>
-                                        </div>
+                                    <div className="flex items-center justify-end flex-wrap gap-4">
                                         <div className="flex items-center gap-2 text-slate-500">
                                             <Tag size={16} />
                                             <span className="text-sm">Updates</span>

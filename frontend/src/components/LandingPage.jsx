@@ -166,7 +166,7 @@ const LandingPage = () => {
                                 className="relative bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden group"
                             >
                                 {/* Background Image */}
-                                <div className="absolute inset-0 z-0 opacity-[0.14] pointer-events-none">
+                                <div className="absolute inset-0 z-0 opacity-40 md:opacity-[0.14] pointer-events-none">
                                     <img src={item.bgImage} alt="" className="w-full h-full object-cover brightness-110" />
                                     <div className="absolute inset-0 bg-[#FDB913]/10 mix-blend-overlay"></div>
                                 </div>
@@ -322,7 +322,7 @@ const LandingPage = () => {
                                 </div>
 
                                 {/* Default Background Image (Static) */}
-                                <div className="absolute inset-0 z-0 opacity-[0.15] group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
+                                <div className="absolute inset-0 z-0 opacity-40 md:opacity-[0.15] group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
                                     <img
                                         src={service.bgImage}
                                         alt=""

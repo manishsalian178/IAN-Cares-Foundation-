@@ -61,7 +61,7 @@ const AboutPage = () => {
                             {/* Placeholder for Ian's photo - using a generic image if specific not available, or keeping a placeholder block */}
                             <div className="bg-slate-200 w-full aspect-[4/5] flex items-center justify-center text-slate-400">
                                 <img
-                                    src="/images/Ian sir 1.jpeg"
+                                    src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446144/ian_cares_foundation/Ian_sir_1.jpg"
                                     alt="Ian Austin Mascarenhas"
                                     className="w-full h-full object-cover"
                                 />
@@ -158,7 +158,7 @@ const AboutPage = () => {
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-16 items-center">
                     <div className="order-2 md:order-1">
                         <img
-                            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1000&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772521171/howfamiliescansupportthelovedones_uojkom.avif"
                             alt="Sarva Dharma Sangama Centre"
                             className="rounded-[40px] shadow-2xl w-full object-cover aspect-video"
                         />

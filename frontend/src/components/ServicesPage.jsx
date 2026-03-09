@@ -5,11 +5,9 @@ import ServicesHero from './ServicesHero';
 import HowWeServe from './HowWeServe';
 import ServicesSection from './ServicesSection';
 import PostRecovery from './PostRecovery';
-import ConsultancyModal from './ConsultancyModal';
 import ServiceDetailModal from './ServiceDetailModal';
 
 const ServicesPage = () => {
-    const [isConsultancyModalOpen, setIsConsultancyModalOpen] = useState(false);
     const [selectedService, setSelectedService] = useState(null);
     const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
@@ -19,10 +17,6 @@ const ServicesPage = () => {
 
     const handleDetailedExplore = () => {
         document.getElementById('detailed-services')?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    const openConsultancyModal = () => {
-        window.location.href = '/consultation';
     };
 
     const openDetailModal = (service) => {
@@ -36,7 +30,6 @@ const ServicesPage = () => {
 
             <ServicesHero
                 onExplore={handleExplore}
-                onBook={openConsultancyModal}
             />
 
             <HowWeServe
@@ -47,15 +40,9 @@ const ServicesPage = () => {
 
             <ServicesSection
                 onReadMore={openDetailModal}
-                onBook={openConsultancyModal}
             />
 
             <Footer />
-
-            <ConsultancyModal
-                isOpen={isConsultancyModalOpen}
-                onClose={() => setIsConsultancyModalOpen(false)}
-            />
 
             <ServiceDetailModal
                 isOpen={isDetailModalOpen}

@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import MobileCarousel from './MobileCarousel';
 
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://ian-cares-backend.vercel.app';
 
 const Journey = () => {
     const [stories, setStories] = useState([]);
@@ -200,15 +200,26 @@ const Journey = () => {
                                 <X size={20} />
                             </button>
 
-                            {/* Image */}
-                            <div className="relative h-80 overflow-hidden rounded-t-3xl">
-                                <img
-                                    src={getImageUrl(selectedStory.image)}
-                                    alt={selectedStory.name}
-                                    className="w-full h-full object-cover"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                                <div className="absolute bottom-8 left-8 right-8">
+                            {/* Featured Media (Image or Video) */}
+                            <div className="relative h-80 overflow-hidden rounded-t-3xl bg-slate-900">
+                                {selectedStory.video ? (
+                                    <video
+                                        src={selectedStory.video}
+                                        controls
+                                        className="w-full h-full object-contain"
+                                        poster={getImageUrl(selectedStory.image)}
+                                    >
+                                        Your browser does not support the video tag.
+                                    </video>
+                                ) : (
+                                    <img
+                                        src={getImageUrl(selectedStory.image)}
+                                        alt={selectedStory.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+                                <div className="absolute bottom-8 left-8 right-8 pointer-events-none">
                                     <h2 className="text-4xl font-bold text-white mb-2">{selectedStory.name}</h2>
                                     <div className="flex items-center gap-2 text-white/90">
                                         <Calendar size={16} />

@@ -1,14 +1,26 @@
-import React from 'react';
-import { Heart, Phone, MapPin, Mail, Facebook, Instagram, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
+import { Heart, Phone, MapPin, Mail, Facebook, Instagram, Linkedin, CheckCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Footer = () => {
+    const [showCopyPopup, setShowCopyPopup] = useState(false);
+    const email = "iancaresfoundation@gmail.com";
+
+    const handleMailClick = (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(email).then(() => {
+            setShowCopyPopup(true);
+            setTimeout(() => setShowCopyPopup(false), 3000);
+        });
+    };
+
     return (
-        <footer id="contact" className="pt-16 md:pt-20 pb-10 px-6 bg-slate-900 text-white rounded-t-[30px] md:rounded-t-[50px]">
+        <footer id="contact" className="pt-16 md:pt-20 pb-10 px-6 bg-slate-900 text-white rounded-t-[30px] md:rounded-t-[50px] relative">
             <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid md:grid-cols-12 gap-12 mb-20">
                 <div className="md:col-span-5">
                     <div className="flex items-center gap-4 mb-8">
                         <img
-                            src="/images/logo.png"
+                            src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446233/ian_cares_foundation/logo.png"
                             alt="Ian Cares Foundation Logo"
                             className="h-12 md:h-16 w-auto object-contain"
                         />
@@ -61,18 +73,33 @@ const Footer = () => {
                         <h4 className="text-[#FDB913] font-bold mb-6 text-lg uppercase tracking-widest">Write To Us</h4>
                         <div className="flex items-center gap-4">
                             <Mail className="text-[#FDB913] shrink-0" />
-                            <span className="text-slate-300 text-base break-all">iancaresfoundation@gmail.com</span>
+                            <span className="text-slate-300 text-base break-all">{email}</span>
                         </div>
                         <div className="mt-8">
-                            <a
-                                href="mailto:iancaresfoundation@gmail.com"
-                                className="w-full bg-[#1A6B96] text-white py-4 rounded-2xl font-bold hover:bg-[#155a82] transition-all inline-block text-center"
+                            <button
+                                onClick={handleMailClick}
+                                className="w-full bg-[#1A6B96] text-white py-4 rounded-2xl font-bold hover:bg-[#155a82] transition-all inline-block text-center cursor-pointer"
                             >
                                 Send a Message
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
+
+                {/* Copy Status Popup */}
+                <AnimatePresence>
+                    {showCopyPopup && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20, x: '-50%' }}
+                            animate={{ opacity: 1, y: 0, x: '-50%' }}
+                            exit={{ opacity: 0, y: 20, x: '-50%' }}
+                            className="fixed bottom-10 left-1/2 z-50 bg-[#1A6B96] text-white px-6 py-3 rounded-full font-bold shadow-2xl flex items-center gap-3 border border-white/20 backdrop-blur-md"
+                        >
+                            <CheckCircle size={20} className="text-[#FDB913]" />
+                            mail id copied
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
             <div className="max-w-[1600px] mx-auto px-6 md:px-12 pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm">

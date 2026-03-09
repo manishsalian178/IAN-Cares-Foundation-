@@ -37,11 +37,6 @@ const Navbar = ({ onBookConsult }) => {
         }
     };
 
-    const handleBookClick = () => {
-        setMobileMenuOpen(false);
-        window.location.href = '/consultation';
-    };
-
     return (
         <>
             <nav
@@ -51,7 +46,7 @@ const Navbar = ({ onBookConsult }) => {
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-between items-center">
                     <Link to="/" className="flex items-center gap-3">
                         <img
-                            src="/images/logo.png"
+                            src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446233/ian_cares_foundation/logo.png"
                             alt="Ian Cares Foundation Logo"
                             className="h-18 w-auto object-contain"
                         />
@@ -86,13 +81,14 @@ const Navbar = ({ onBookConsult }) => {
                             <Heart size={18} />
                             Donate
                         </Link>
-                        <button
-                            onClick={handleBookClick}
+                        <Link
+                            to="/consultation"
+                            onClick={() => setMobileMenuOpen(false)}
                             className="bg-[#FDB913] text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:bg-[#e5a811] transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2"
                         >
                             <Phone size={18} />
                             Book Help
-                        </button>
+                        </Link>
                     </div>
 
                     <button
@@ -140,13 +136,14 @@ const Navbar = ({ onBookConsult }) => {
                             <Heart size={24} />
                             Donate
                         </Link>
-                        <button
-                            onClick={handleBookClick}
+                        <Link
+                            to="/consultation"
+                            onClick={() => setMobileMenuOpen(false)}
                             className="bg-[#FDB913] text-white px-10 py-4 rounded-full font-bold text-xl flex items-center gap-2"
                         >
                             <Phone size={24} />
                             Book Help
-                        </button>
+                        </Link>
                     </motion.div>
                 )}
             </AnimatePresence>

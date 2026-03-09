@@ -21,17 +21,19 @@ import {
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://ian-cares-backend.vercel.app';
 
 const LandingPage = () => {
     const [livesTouched, setLivesTouched] = useState('2,10,000');
+    const [clientRating, setClientRating] = useState('4.8');
 
     useEffect(() => {
         const fetchStats = async () => {
             try {
                 const response = await axios.get(`${API_BASE_URL}/api/settings`);
-                if (response.data && response.data.livesTouched) {
-                    setLivesTouched(response.data.livesTouched);
+                if (response.data) {
+                    if (response.data.livesTouched) setLivesTouched(response.data.livesTouched);
+                    if (response.data.clientRating) setClientRating(response.data.clientRating);
                 }
             } catch (error) {
                 console.error('Error fetching stats:', error);
@@ -44,19 +46,19 @@ const LandingPage = () => {
             icon: <Brain className="w-10 h-10" />,
             title: 'De-addiction Strategy',
             description: 'Focusing on long-term sobriety and relapse prevention through a guided, supportive environment.',
-            bgImage: '/images/de addiction.jpeg'
+            bgImage: 'https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446184/ian_cares_foundation/de_addiction.jpg'
         },
         {
             icon: <Heart className="w-10 h-10" />,
             title: 'Mental Health Support',
             description: 'Counseling for depression and anxiety focused on restoring balance and building emotional resilience.',
-            bgImage: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=2070&auto=format&fit=crop'
+            bgImage: 'https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772521278/Mentalhealthsupport_gbqdt4.avif'
         },
         {
             icon: <Users className="w-10 h-10" />,
             title: 'Youth Empowerment',
             description: 'Workshops focused on unlocking full potential and discovering internal purpose for young adults.',
-            bgImage: '/images/youth.jpg'
+            bgImage: 'https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446244/ian_cares_foundation/youth.jpg'
         }
     ];
 
@@ -64,17 +66,17 @@ const LandingPage = () => {
         {
             title: 'Peer Support',
             desc: 'Connecting with those who understand the struggle deeply.',
-            bgImage: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop'
+            bgImage: 'https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772449194/Peersupport_pfd7uq.avif'
         },
         {
             title: 'Holistic Focus',
             desc: 'Restoring mind, body, and spirit in unison.',
-            bgImage: 'https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?q=80&w=2076&auto=format&fit=crop'
+            bgImage: 'https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772521167/Holisticfocus_qg3xuh.avif'
         },
         {
             title: 'Family Values',
             desc: 'Rebuilding the broken bridges to your loved ones.',
-            bgImage: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2070&auto=format&fit=crop'
+            bgImage: 'https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772521176/family_relationshiptheraphy_g8akmx.avif'
         }
     ];
 
@@ -114,7 +116,7 @@ const LandingPage = () => {
                             {[
                                 { icon: <Globe className="w-5 h-5" />, label: livesTouched.endsWith('+') ? livesTouched : `${livesTouched}+`, subtext: "Lives Touched" },
                                 { icon: <ShieldCheck className="w-5 h-5" />, label: "100%", subtext: "Private & Secure" },
-                                { icon: <Star className="w-5 h-5 fill-[#FDB913] text-[#FDB913]" />, label: "4.9", subtext: "Client Rating" },
+                                { icon: <Star className="w-5 h-5 fill-[#FDB913] text-[#FDB913]" />, label: clientRating, subtext: "Client Rating" },
                             ].map((stat, idx) => (
                                 <div key={idx} className="flex flex-col gap-1">
                                     <div className="flex items-center gap-2 text-[#1A6B96]">
@@ -135,7 +137,7 @@ const LandingPage = () => {
                     >
                         <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
                             <img
-                                src="/images/Ian cares house.jpeg"
+                                src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446142/ian_cares_foundation/Ian_cares_house.jpg"
                                 alt="Healing Journey"
                                 className="w-full aspect-[4/5] object-cover"
                             />

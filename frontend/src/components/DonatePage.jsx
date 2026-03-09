@@ -31,7 +31,7 @@ const DonatePage = () => {
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
                         <motion.img
-                            src="/images/donate.png"
+                            src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446191/ian_cares_foundation/donate.png"
                             alt="Support Our Cause Hero"
                             className="w-full h-full object-cover"
                             animate={{ scale: [1, 1.1, 1] }}
@@ -147,7 +147,7 @@ const DonatePage = () => {
 
                             <div className="bg-white p-4 rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300">
                                 <img
-                                    src="/images/qr_code_dummy.png"
+                                    src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446235/ian_cares_foundation/qr_code_dummy.jpg"
                                     alt="Donation QR Code"
                                     className="w-48 h-48 md:w-64 md:h-64 object-contain"
                                 />

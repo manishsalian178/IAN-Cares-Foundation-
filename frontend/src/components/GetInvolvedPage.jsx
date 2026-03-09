@@ -42,7 +42,7 @@ const GetInvolvedPage = () => {
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
                         <motion.img
-                            src="/images/image copy.png"
+                            src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446216/ian_cares_foundation/image_copy"
                             alt="Get Involved Hero"
                             className="w-full h-full object-cover"
                             animate={{ scale: [1, 1.1, 1] }}

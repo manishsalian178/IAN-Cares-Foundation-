@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import MobileCarousel from './MobileCarousel';
 
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://ian-cares-backend.vercel.app';
 
 const Gallery = () => {
     const [galleryImages, setGalleryImages] = useState([]);
@@ -42,7 +42,7 @@ const Gallery = () => {
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
                         <motion.img
-                            src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=2000&auto=format&fit=crop"
+                            src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772521323/gallarybackground_et760a.avif"
                             alt="Gallery Hero"
                             className="w-full h-full object-cover"
                             animate={{ scale: [1, 1.1, 1] }}

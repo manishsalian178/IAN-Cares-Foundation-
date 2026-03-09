@@ -40,7 +40,7 @@ const WelcomePopup = ({ isOpen, onClose }) => {
                         <div className="overflow-y-auto p-1.5 md:p-4 flex items-center justify-center bg-slate-50/50 min-h-[150px]">
                             <div className="relative w-full flex items-center justify-center overflow-hidden">
                                 <img
-                                    src="/images/Ian care default pop up.jpeg"
+                                    src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446141/ian_cares_foundation/Ian_care_default_pop_up.jpg"
                                     alt="Welcome Message"
                                     className="w-full h-auto max-h-[70vh] rounded-2xl shadow-sm object-contain"
                                 />

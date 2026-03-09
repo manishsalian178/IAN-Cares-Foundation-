@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ContactSection from './ContactSection';
 import SocialSection from './SocialSection';
-import ConsultancyModal from './ConsultancyModal';
 
 const ContactPage = () => {
-    const [isConsultancyModalOpen, setIsConsultancyModalOpen] = useState(false);
 
     return (
         <div className="min-h-screen font-sans text-slate-800 bg-[#E8F6FD]">
@@ -45,12 +44,12 @@ const ContactPage = () => {
                             <p className="text-lg md:text-2xl text-blue-50 leading-relaxed max-w-2xl mb-10 drop-shadow-md">
                                 We are here to guide you toward healing and hope. Reach out today for a second chance at life.
                             </p>
-                            <button
-                                onClick={() => window.location.href = '/consultation'}
-                                className="bg-[#FDB913] text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-[#e5a811] transition-all transform hover:scale-105 w-fit"
+                            <Link
+                                to="/consultation"
+                                className="bg-[#FDB913] text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-[#e5a811] transition-all transform hover:scale-105 w-fit inline-block"
                             >
                                 Book a Consult
-                            </button>
+                            </Link>
                         </motion.div>
                     </div>
                 </div>
@@ -59,11 +58,6 @@ const ContactPage = () => {
             <ContactSection />
             <SocialSection />
             <Footer />
-
-            <ConsultancyModal
-                isOpen={isConsultancyModalOpen}
-                onClose={() => setIsConsultancyModalOpen(false)}
-            />
         </div>
     );
 };

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { Calendar, User, Phone, Mail, MessageSquare, ChevronDown, CheckCircle, ArrowRight, Heart } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 const ConsultationPage = () => {
+    const location = useLocation();
     const [formData, setFormData] = useState({
         fullName: '',
         phoneNumber: '',
@@ -13,6 +15,15 @@ const ConsultationPage = () => {
         preferredDate: '',
         concern: ''
     });
+
+    useEffect(() => {
+        if (location.state?.selectedService) {
+            setFormData(prev => ({
+                ...prev,
+                selectedService: location.state.selectedService
+            }));
+        }
+    }, [location.state]);
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const ServicesHero = ({ onExplore, onBook }) => {
     return (
@@ -9,7 +10,7 @@ const ServicesHero = ({ onExplore, onBook }) => {
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <motion.img
-                        src="/images/service s.avif"
+                        src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446237/ian_cares_foundation/service_s.avif"
                         alt="Healing Hero"
                         className="w-full h-full object-cover brightness-110 contrast-120 saturate-120"
                         animate={{ scale: [1, 1.1, 1] }}
@@ -40,12 +41,12 @@ const ServicesHero = ({ onExplore, onBook }) => {
                                 Explore the Service
                                 <ArrowRight className="group-hover:translate-x-2 transition-transform" />
                             </button>
-                            <button
-                                onClick={onBook}
+                            <Link
+                                to="/consultation"
                                 className="bg-[#FDB913] text-white px-8 py-4 md:py-5 rounded-full font-bold text-lg shadow-2xl hover:bg-[#e5a811] transition-all transform hover:scale-105"
                             >
                                 Book a Consultancy
-                            </button>
+                            </Link>
                         </div>
                     </motion.div>
                 </div>

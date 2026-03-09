@@ -37,7 +37,7 @@ const PostRecovery = () => {
                     >
                         <div className="rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/10">
                             <img
-                                src="/images/hands.png"
+                                src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446201/ian_cares_foundation/hands.png"
                                 alt="Supportive Hands"
                                 className="w-full h-full object-cover aspect-video"
                             />

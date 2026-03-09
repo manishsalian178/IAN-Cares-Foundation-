@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import MobileCarousel from './MobileCarousel';
 
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://ian-cares-backend.vercel.app';
 
 const Blog = () => {
     const [blogs, setBlogs] = useState([]);
@@ -43,7 +43,7 @@ const Blog = () => {
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
                         <motion.img
-                            src="/images/blog2.png"
+                            src="https://res.cloudinary.com/dzzhtglaj/image/upload/q_auto/f_auto/v1772446171/ian_cares_foundation/blog2.png"
                             alt="Blog Hero"
                             className="w-full h-full object-cover"
                             animate={{ scale: [1, 1.1, 1] }}
@@ -237,20 +237,31 @@ const Blog = () => {
                                 <X size={20} />
                             </button>
 
-                            {/* Featured Image */}
-                            <div className="relative h-80 overflow-hidden rounded-t-3xl">
-                                <img
-                                    src={getImageUrl(selectedBlog.image)}
-                                    alt={selectedBlog.title}
-                                    className="w-full h-full object-cover"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                            {/* Featured Media (Image or Video) */}
+                            <div className="relative h-80 overflow-hidden rounded-t-3xl bg-slate-900">
+                                {selectedBlog.video ? (
+                                    <video
+                                        src={selectedBlog.video}
+                                        controls
+                                        className="w-full h-full object-contain"
+                                        poster={getImageUrl(selectedBlog.image)}
+                                    >
+                                        Your browser does not support the video tag.
+                                    </video>
+                                ) : (
+                                    <img
+                                        src={getImageUrl(selectedBlog.image)}
+                                        alt={selectedBlog.title}
+                                        className="w-full h-full object-cover"
+                                    />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
                                 <div className="absolute top-8 left-8">
                                     <span className="bg-[#FDB913] text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
                                         Updates
                                     </span>
                                 </div>
-                                <div className="absolute bottom-8 left-8 right-8">
+                                <div className="absolute bottom-8 left-8 right-8 pointer-events-none">
                                     <h2 className="text-4xl font-bold text-white mb-4">{selectedBlog.title}</h2>
                                     <div className="flex items-center gap-4 text-white/90">
                                         <div className="flex items-center gap-2">
